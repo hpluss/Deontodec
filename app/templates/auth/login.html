@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEONTODEC - {% if action == "login" %}Connexion{% else %}Inscription{% endif %}</title>
+</head>
+<body>
+    <h1>{% if action == "login" %}Connexion{% else %}Inscription{% endif %}</h1>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {% if action == "register" %}
+            <p>
+                {{ form.username.label }}<br>
+                {{ form.username(size=32) }}
+            </p>
+        {% endif %}
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=64) }}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+        </p>
+        {% if action == "register" %}
+            <p>
+                {{ form.password2.label }}<br>
+                {{ form.password2(size=32) }}
+            </p>
+        {% endif %}
+        <p>{{ form.submit() }}</p>
+    </form>
+    
+    {% if action == "login" %}
+        <p>Pas encore de compte? <a href="{{ url_for('register') }}">Inscrivez-vous ici</a></p>
+    {% else %}
+        <p>Déjà un compte? <a href="{{ url_for('login') }}">Connectez-vous ici</a></p>
+    {% endif %}
+</body>
+</html>

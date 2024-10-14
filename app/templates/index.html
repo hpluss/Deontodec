@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEONTODEC - Préparation à l'épreuve de déontologie du DEC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        nav {
+            margin-bottom: 20px;
+        }
+        a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    {% if current_user.is_authenticated %}    
+        <nav>
+            <a href="{{ url_for('logout') }}">Se déconnecter</a>
+            <a href="{{ url_for('profile') }}">Profil</a>
+        </nav>
+        <h2>Bonjour, {{ current_user.username }}!</h2>
+    {% else %}
+    <nav>
+        <a href="{{ url_for('login') }}">Se connecter</a>
+        <a href="{{ url_for('register') }}">S'inscrire</a>
+    </nav>
+        
+    {% endif %}
+
+    <h1>Bienvenue sur DEONTODEC</h1>
+    
+    <p>Préparez-vous efficacement à l'épreuve de déontologie du DEC avec nos quiz adaptatifs et nos ressources ciblées.</p>
+    
+    <a href="">Commencer gratuitement</a>
+
+
+    
+</body>
+</html>
